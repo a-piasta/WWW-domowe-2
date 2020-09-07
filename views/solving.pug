@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container
+    .intro
+    .quiz
+      .question-number-wrapper
+      .penalty-wrapper
+      .timer-wrapper
+      .question
+      .answer-wrapper
+        label(for='answer')='odpowiedź:'
+        input(type='number', id='answer')
+      .buttons
+        button.button-prev(onclick='previousQuestion()')='Poprzednie pytanie'
+        button.button-next(onclick='nextQuestion()')='Następne pytanie'
+        button.button-finish(onclick='finishQuiz()')='Zakończ quiz'
+      .finish
+        form(action='/submit/'+quizId, method='post', id='submit-quiz')
+          input(type='hidden', name='_csrf', value=csrfToken)
+          input(type='hidden', name='resultJSON')
+  script(src='/javascripts/main.js')

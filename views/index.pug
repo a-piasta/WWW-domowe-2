@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  if username == null
+    h1 Witaj na stronie głównej quizu!
+    div
+      a(href='/login') Zaloguj się
+    div
+      a(href='/register') Zarejestruj się
+  else
+    h1 Witaj na stronie głównej, #{username}!
+    div
+      a(href='/logout') Wyloguj się
+    div
+      a(href='/change_password') Zmień hasło
+    div
+      a(href='/choose_quiz') Wybierz quiz

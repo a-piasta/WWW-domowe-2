@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  unless raport
+    form(action='/solve/'+quizId, method='post')
+      input(type='hidden', name='_csrf', value=csrfToken)
+      input(type='submit', value='Rozpocznij quiz')
+  .top-scores
+    h2= 'Najlepsze wyniki'
+    ol
+      each score in topScores
+        li= score.login+': '+score.result
+  if statistics
+    .statistics
+      h2= 'Statystyki'
+      h3= 'średni czas spędzony nad każdym pytaniem (w sekundach)'
+      ol
+        each tmp in statistics
+          li= tmp
+  if raport
+    .rc
+      .raport
+        h2= 'Raport z Twojego podejścia'
+        each question in raport
+          if question.yourAnswer == question.correctAnswer
+            .qrc
+              .question-raport-correct
+                .que= 'Pytanie: '+question.question
+                .ans= 'Twoja odpowiedź (poprawna): '+question.yourAnswer
+                .pen= 'Potencjalna kara za błędną odpowiedź: '+question.penalty
+          else
+            .qrw
+              .question-raport-wrong
+                .que= 'Pytanie: '+question.question
+                .ans= 'Twoja odpowiedź: '+question.yourAnswer
+                .cor= 'Poprawna odpowiedź: '+question.correctAnswer
+                .pen= 'Potencjalna kara za błędną odpowiedź: '+question.penalty

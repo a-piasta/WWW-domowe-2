@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= 'Wybierz quiz!'
+  ul
+    each quiz in quizList
+      li
+        a(href='/quiz/'+quiz.id)= quiz.name

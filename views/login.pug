@@ -1,0 +1,28 @@
+extends layout
+block content
+  h1=title
+  form(action=redirect, method='post')
+    div
+      input(type='hidden', name='_csrf', value=csrfToken)
+    if actionType == 'changePassword'
+      div
+        input(type='hidden', name='login', value=username)
+      div
+        input(type='password', name='pass', placeholder='old password', required=true)
+      div
+        input(type='password', name='pass1', placeholder='new password', required=true)
+      div
+        input(type='password', name='pass2', placeholder='repeat password', required=true)
+    else
+      div
+        input(name='login', placeholder='username', required=true)
+      if actionType == 'login'
+        div
+          input(type='password', name='pass', placeholder='password', required=true)
+      else
+        div
+          input(type='password', name='pass1', placeholder='password', required=true)
+        div
+          input(type='password', name='pass2', placeholder='repeat password', required=true)
+    div
+      input(type='submit', value=actionTitle)
